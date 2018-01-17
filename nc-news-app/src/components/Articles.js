@@ -36,7 +36,7 @@ const ArticleSummary = ({ article }) => {
   return (
     <section>
       <Link to={'/articles/' + article._id}><p>{article.title}</p></Link>
-      <p>{article.created_by}</p>
+      <Link to={'/users/' + article.created_by}><p>{article.created_by}</p></Link>
     </section>
   )
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class ArticlePage extends React.Component {
   state = {
@@ -30,8 +31,8 @@ const ArticleFull = ({ article }) => {
     <section>
       <h3>{title}</h3>
       <p>{body}</p>
-      <p>Author: {created_by}</p>
-      <p>Topics: {belongs_to}</p>
+      <p>Author: <Link to={'/users/' + created_by}>{created_by}</Link></p>
+      <p>Topic: <Link to={'/topics/' + belongs_to}>{belongs_to}</Link></p>
       <p>Votes: {votes}</p>
     </section>
   );
