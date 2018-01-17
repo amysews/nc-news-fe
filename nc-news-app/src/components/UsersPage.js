@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 
 class UsersPage extends React.Component {
   state = {
@@ -23,7 +25,7 @@ class UsersPage extends React.Component {
         <h1>List of Users</h1>
         {users.map((user, i) => {
           return (
-            <UserSummary user={user} />
+            <UserSummary user={user} key={i} />
           )
         })}
       </section>
@@ -34,7 +36,7 @@ class UsersPage extends React.Component {
 const UserSummary = ({ user }) => {
   return (
     <section>
-      <span>Username: {user.username}</span>  <span>Name: {user.name}</span>
+      <span>Username: <Link to={'/users/' + user.username} >{user.username}</Link></span>  <span>Name: {user.name}</span>
     </section>
   )
 }

@@ -5,6 +5,7 @@ import HomePage from './HomePage';
 import PageNotFound from './PageNotFound';
 import TopicsPage from './TopicsPage';
 import UsersPage from './UsersPage';
+import UserPage from './UserPage';
 import ArticlePage from './ArticlePage';
 
 class App extends React.Component {
@@ -18,6 +19,7 @@ class App extends React.Component {
             <Route exact path="/articles/:article_id" component={ArticlePage} />
             <Route exact path="/topics" component={TopicsPage} />
             <Route exact path="/users" component={UsersPage} />
+            <Route exact path="/users/:username" component={UserPage} />
             <Route component={PageNotFound} />
           </Switch>
         </div>
