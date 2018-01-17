@@ -4,7 +4,6 @@ import Articles from './Articles';
 const HomePage = () => {
   return (
     <section>
-      <h2>Homepage elements</h2>
       <Articles />
     </section>
   );
