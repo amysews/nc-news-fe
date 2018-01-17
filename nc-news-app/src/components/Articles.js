@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class Articles extends React.Component {
   state = {
@@ -34,7 +35,7 @@ class Articles extends React.Component {
 const ArticleSummary = ({ article }) => {
   return (
     <section>
-      <p>{article.title}</p>
+      <Link to={'/articles/' + article._id}><p>{article.title}</p></Link>
       <p>{article.created_by}</p>
     </section>
   )

@@ -5,6 +5,7 @@ import HomePage from './HomePage';
 import PageNotFound from './PageNotFound';
 import TopicsPage from './TopicsPage';
 import UsersPage from './UsersPage';
+import ArticlePage from './ArticlePage';
 
 class App extends React.Component {
   render() {
@@ -14,6 +15,7 @@ class App extends React.Component {
           <NavBar />
           <Switch>
             <Route exact path="/" component={HomePage} />
+            <Route exact path="/articles/:article_id" component={ArticlePage} />
             <Route exact path="/topics" component={TopicsPage} />
             <Route exact path="/users" component={UsersPage} />
             <Route component={PageNotFound} />
