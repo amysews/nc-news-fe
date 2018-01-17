@@ -11,7 +11,7 @@ class Articles extends React.Component {
   }
 
   fetchArticles = () => {
-    fetch(`${process.env.REACT_APP_API_URL}/articles`)
+    fetch(`${process.env.REACT_APP_API_URL}/${this.props.endpoint}`)
       .then(buffer => buffer.json())
       .then(({ articles }) => this.setState({ articles }))
       .catch(console.log)

@@ -4,7 +4,7 @@ import Articles from './Articles';
 const HomePage = () => {
   return (
     <section>
-      <Articles />
+      <Articles endpoint={'articles'} />
     </section>
   );
 };
