@@ -22,9 +22,9 @@ class Articles extends React.Component {
     return (
       <section>
         <h3>Selection of articles</h3>
-        {articles.map((article, i) => {
+        {articles.sort((a,b) => b.votes - a.votes).slice(0, 10).map((article, i) => {
           return (
-            <ArticleSummary article={article} />
+            <ArticleSummary article={article} key={i} />
           )
         })}
       </section>
@@ -33,10 +33,13 @@ class Articles extends React.Component {
 }
 
 const ArticleSummary = ({ article }) => {
+  const { _id, title, body, created_by, belongs_to, votes, comments } = article;
   return (
     <section>
-      <Link to={'/articles/' + article._id}><p>{article.title}</p></Link>
-      <Link to={'/users/' + article.created_by}><p>{article.created_by}</p></Link>
+      <Link to={'/articles/' + _id}><p>{title}</p></Link>
+      <Link to={'/users/' + created_by}><p>{created_by}</p></Link>
+      <p>Votes: {votes}</p>
+      <p>Comments: {comments}</p>
     </section>
   )
 }
