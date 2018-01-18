@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Voter from './Voter';
-import { updateVote } from '../api';
+import { updateVote, getArticle } from '../api';
 
 class ArticlePage extends React.Component {
   state = {
@@ -13,8 +13,7 @@ class ArticlePage extends React.Component {
   }
 
   fetchArticle = (articleId) => {
-    fetch(`${process.env.REACT_APP_API_URL}/articles/${articleId}`)
-      .then(buffer => buffer.json())
+    getArticle(articleId)
       .then(article => this.setState({ article }))
       .catch(console.log)
   }

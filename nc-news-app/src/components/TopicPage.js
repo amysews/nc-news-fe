@@ -2,13 +2,8 @@ import React from 'react';
 import Articles from './Articles';
 
 class TopicPage extends React.Component {
-  // not used?
-  state = {
-    articles: []
-  };
-
   // display Nav with topics at the top of every page?
-  
+
   render() {
     return (
       <section>

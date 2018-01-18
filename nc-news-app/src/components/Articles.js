@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Voter from './Voter';
-import { updateVote } from '../api';
+import { getArticles, updateVote } from '../api';
 
 class Articles extends React.Component {
   state = {
@@ -13,22 +13,9 @@ class Articles extends React.Component {
   }
 
   fetchArticles = () => {
-    fetch(`${process.env.REACT_APP_API_URL}/${this.props.endpoint}`)
-      .then(buffer => buffer.json())
+    getArticles(this.props.endpoint)
       .then(({ articles }) => this.setState({ articles }))
       .catch(console.log)
-  }
-
-  makeVote = (id, direction) => {
-    updateVote('articles', id, direction)
-      .then(body => {
-        const newArticle = body;
-        const newArticles = this.state.articles.map(article => {
-          if (article._id === newArticle._id) return newArticle;
-          else return article;
-        });
-        this.setState({ articles: newArticles });
-      })
   }
 
   render() {
@@ -43,6 +30,21 @@ class Articles extends React.Component {
         })}
       </section>
     );
+  }
+
+  makeVote = (id, direction) => {
+    updateVote('articles', id, direction)
+      .then(body => {
+        const newArticle = body;
+        const newArticles = this.state.articles.map(article => {
+          if (article._id === newArticle._id) {
+            newArticle.comments = article.comments;
+            return newArticle;
+          }
+          else return article;
+        });
+        this.setState({ articles: newArticles });
+      })
   }
 }
 

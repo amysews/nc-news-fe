@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { getTopics } from '../api';
 
 class TopicsPage extends React.Component {
   state = {
@@ -11,8 +12,7 @@ class TopicsPage extends React.Component {
   }
 
   fetchTopics = () => {
-    fetch(`${process.env.REACT_APP_API_URL}/topics`)
-      .then(buffer => buffer.json())
+    getTopics()
       .then(({ topics }) => this.setState({ topics }))
       .catch(console.log)
   }

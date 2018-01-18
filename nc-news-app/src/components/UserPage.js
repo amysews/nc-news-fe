@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { getUser } from '../api';
 
 class UserPage extends React.Component {
   state = {
@@ -11,8 +11,7 @@ class UserPage extends React.Component {
   }
 
   fetchUser = (username) => {
-    fetch(`${process.env.REACT_APP_API_URL}/users/${username}`)
-      .then(buffer => buffer.json())
+    getUser(username)
       .then(({ users }) => this.setState({ user: users[0] }))
       .catch(console.log)
   }

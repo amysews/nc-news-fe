@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import { getUsers } from '../api';
 
 class UsersPage extends React.Component {
   state = {
@@ -12,8 +12,7 @@ class UsersPage extends React.Component {
   }
 
   fetchUsers = () => {
-    fetch(`${process.env.REACT_APP_API_URL}/users`)
-      .then(buffer => buffer.json())
+    getUsers()
       .then(({ users }) => this.setState({ users }))
       .catch(console.log)
   }
