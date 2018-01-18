@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Voter from './Voter';
+import { updateVote } from '../api';
 
 class ArticlePage extends React.Component {
   state = {
@@ -17,23 +19,32 @@ class ArticlePage extends React.Component {
       .catch(console.log)
   }
 
+  makeVote = (id, direction) => {
+    updateVote('articles', id, direction)
+      .then(body => {
+        this.setState({ article: body })
+      })
+  }
+
   render() {
     const { article } = this.state;
     return (
-      <ArticleFull article={article} />
+      <ArticleFull article={article} makeVote={this.makeVote} />
     );
   }
 }
 
-const ArticleFull = ({ article }) => {
-  const { title, body, created_by, belongs_to, votes } = article;
+const ArticleFull = ({ article, makeVote }) => {
+  const { _id, title, body, created_by, belongs_to, votes } = article;
+  const onDownVote = makeVote.bind(null, _id, 'down');
+  const onUpVote = makeVote.bind(null, _id, 'up');
   return (
     <section>
       <h3>{title}</h3>
       <p>{body}</p>
       <p>Author: <Link to={'/users/' + created_by}>{created_by}</Link></p>
       <p>Topic: <Link to={'/topics/' + belongs_to}>{belongs_to}</Link></p>
-      <p>Votes: {votes}</p>
+      <Voter voteCount={votes} downVote={onDownVote} upVote={onUpVote} />
     </section>
   );
 }
