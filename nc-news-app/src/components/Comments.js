@@ -24,7 +24,7 @@ class Comments extends React.Component {
         <h1>Comments</h1>
         <PostComment submitComment={this.submitComment} />
         {comments.sort((a, b) => b.votes - a.votes).map((comment, i) => (
-          <Comment comment={comment} makeVote={this.makeVote} key={i} />
+          <Comment comment={comment} makeVote={this.makeVote} deleteComment={this.deleteComment} key={i} />
         ))}
       </section>
     )
@@ -53,9 +53,17 @@ class Comments extends React.Component {
         this.setState({ comments: [comment, ...this.state.comments] })
       })
   }
+
+  deleteComment = (commentId) => {
+    console.log(commentId)
+    const oldComments = this.state.comments;
+    console.log(oldComments)
+    const newComments = oldComments.filter(comment => comment["_id"] !== commentId)
+    this.setState({ comments: newComments })
+  }
 }
 
-const Comment = ({ comment, makeVote }) => {
+const Comment = ({ comment, makeVote, deleteComment }) => {
   const { _id, body, created_by, created_at, votes, belongs_to } = comment;
   const onDownVote = makeVote.bind(null, _id, 'down');
   const onUpVote = makeVote.bind(null, _id, 'up');
@@ -65,6 +73,7 @@ const Comment = ({ comment, makeVote }) => {
       <p>{created_by}</p>
       <p>{created_at}</p>
       <Voter voteCount={votes} downVote={onDownVote} upVote={onUpVote} />
+      <button onClick={() => deleteComment(_id)}  >Delete</button>
     </section>
   )
 }
