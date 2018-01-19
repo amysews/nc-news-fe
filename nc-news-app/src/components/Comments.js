@@ -1,6 +1,7 @@
 import React from 'react';
 import { getComments, updateVote, postComment, deleteComment } from '../api';
 import Voter from './Voter';
+import moment from 'moment';
 
 class Comments extends React.Component {
   state = {
@@ -68,13 +69,14 @@ class Comments extends React.Component {
 
 const Comment = ({ comment, makeVote, deleteThisComment }) => {
   const { _id, body, created_by, created_at, votes, belongs_to } = comment;
+  const date = moment(created_at).format('MMMM Do YYYY, h:mm:ss a');
   const onDownVote = makeVote.bind(null, _id, 'down');
   const onUpVote = makeVote.bind(null, _id, 'up');
   return (
     <section>
       <p>{body}</p>
       <p>{created_by}</p>
-      <p>{created_at}</p>
+      <p>{date}</p>
       <Voter voteCount={votes} downVote={onDownVote} upVote={onUpVote} />
       <button onClick={() => deleteThisComment(_id)}  >Delete</button>
     </section>

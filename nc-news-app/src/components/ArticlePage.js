@@ -14,7 +14,6 @@ class ArticlePage extends React.Component {
   }
 
   fetchArticle = (articleId) => {
-    console.log(articleId)
     getArticle(articleId)
       .then(article => this.setState({ article }))
       .catch(console.log)
