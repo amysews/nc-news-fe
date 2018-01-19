@@ -12,7 +12,7 @@ class UserPage extends React.Component {
 
   fetchUser = (username) => {
     getUser(username)
-      .then(({ users }) => this.setState({ user: users[0] }))
+      .then(({ user }) => this.setState({ user }))
       .catch(console.log)
   }
 

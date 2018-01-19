@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Voter from './Voter';
 import { updateVote, getArticle } from '../api';
+import Comments from './Comments';
 
 class ArticlePage extends React.Component {
   state = {
@@ -28,7 +29,10 @@ class ArticlePage extends React.Component {
   render() {
     const { article } = this.state;
     return (
-      <ArticleFull article={article} makeVote={this.makeVote} />
+      <section>
+        <ArticleFull article={article} makeVote={this.makeVote} />
+        <Comments articleId={article._id} />
+      </section>
     );
   }
 }
