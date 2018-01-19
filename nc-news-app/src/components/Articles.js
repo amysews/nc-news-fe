@@ -22,8 +22,7 @@ class Articles extends React.Component {
     const { articles } = this.state;
     return (
       <section>
-        <h3>Selection of articles</h3>
-        {articles.sort((a,b) => b.votes - a.votes).slice(0, 10).map((article, i) => {
+        {articles.sort((a, b) => b.votes - a.votes).slice(0, 10).map((article, i) => {
           return (
             <ArticleSummary article={article} makeVote={this.makeVote} key={i} />
           )
@@ -53,11 +52,13 @@ const ArticleSummary = ({ article, makeVote }) => {
   const onDownVote = makeVote.bind(null, _id, 'down');
   const onUpVote = makeVote.bind(null, _id, 'up');
   return (
-    <section>
-      <Link to={'/articles/' + _id}><p>{title}</p></Link>
-      <Link to={'/users/' + created_by}><p>{created_by}</p></Link>
-      <Voter voteCount={votes} downVote={onDownVote} upVote={onUpVote} />
-      <p>Comments: {comments}</p>
+    <section className="card">
+      <div className="card-body">
+        <Link to={'/articles/' + _id}><p>{title}</p></Link>
+        <Link to={'/users/' + created_by}><p>{created_by}</p></Link>
+        <Voter voteCount={votes} downVote={onDownVote} upVote={onUpVote} />
+        <p>Comments: {comments}</p>
+      </div>
     </section>
   )
 }

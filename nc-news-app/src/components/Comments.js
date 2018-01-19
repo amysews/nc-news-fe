@@ -21,8 +21,8 @@ class Comments extends React.Component {
   render() {
     const { comments } = this.state;
     return (
-      <section>
-        <h1>Comments</h1>
+      <section className="container comments">
+        <h3>Comments</h3>
         <PostComment submitComment={this.submitComment} />
         {comments.sort((a, b) => b.votes - a.votes).map((comment, i) => (
           <Comment comment={comment} makeVote={this.makeVote} deleteThisComment={this.deleteThisComment} key={i} />
@@ -73,22 +73,23 @@ const Comment = ({ comment, makeVote, deleteThisComment }) => {
   const onDownVote = makeVote.bind(null, _id, 'down');
   const onUpVote = makeVote.bind(null, _id, 'up');
   return (
-    <section>
-      <p>{body}</p>
-      <p>{created_by}</p>
-      <p>{date}</p>
-      <Voter voteCount={votes} downVote={onDownVote} upVote={onUpVote} />
-      <button onClick={() => deleteThisComment(_id)}  >Delete</button>
-    </section>
+    <div className="card">
+      <div className="card-body">
+        <p className="card-text">{body}</p>
+        <p className="card-subtitle mb-2 text-muted">{date} by {created_by}</p>
+        <Voter voteCount={votes} downVote={onDownVote} upVote={onUpVote} />
+        <button className="btn btn-danger" onClick={() => deleteThisComment(_id)}  >Delete</button>
+      </div>
+    </div>
   )
 }
 
 const PostComment = ({ submitComment }) => {
   return (
-    <section>
+    <section className="submit-comment">
       <form onSubmit={submitComment}>
         <textarea id="comment" placeholder="Add your comment..." />
-        <button type="submit">Submit</button>
+        <button class="btn btn-secondary" type="submit">Submit</button>
       </form>
     </section>
   )

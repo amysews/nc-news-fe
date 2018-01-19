@@ -42,13 +42,17 @@ const ArticleFull = ({ article, makeVote }) => {
   const onDownVote = makeVote.bind(null, _id, 'down');
   const onUpVote = makeVote.bind(null, _id, 'up');
   return (
-    <section>
-      <h3>{title}</h3>
-      <p>{body}</p>
-      <p>Author: <Link to={'/users/' + created_by}>{created_by}</Link></p>
-      <p>Topic: <Link to={'/topics/' + belongs_to}>{belongs_to}</Link></p>
-      <Voter voteCount={votes} downVote={onDownVote} upVote={onUpVote} />
-    </section>
+    <div className="container">
+      <div className="card">
+        <div className="card-body">
+          <h3 className="card-title">{title}</h3>
+          <p className="card-subtitle mb-2 text-muted">By <Link to={'/users/' + created_by}>{created_by}</Link></p>
+          <p className="card-text">{body}</p>
+          <p className="card-subtitle mb-2 text-muted">Topic: <Link to={'/topics/' + belongs_to}>{belongs_to}</Link></p>
+          <Voter voteCount={votes} downVote={onDownVote} upVote={onUpVote} />
+        </div>
+      </div>
+    </div>
   );
 }
 

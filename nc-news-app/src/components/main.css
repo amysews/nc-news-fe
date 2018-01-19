@@ -1,0 +1,28 @@
+.card {
+  margin-top: 10px;
+}
+
+
+.voting > button {
+  margin: 10px;
+}
+
+.btn-danger {
+  float: right;
+}
+
+textarea {
+  resize: none;
+  width: 100%;
+  border: 1px lightgray solid;
+  border-radius: 3px;
+  padding: 10px;
+}
+
+.submit-comment {
+  text-align: center;
+}
+
+.comments, .articles {
+  margin-top: 30px;
+}
