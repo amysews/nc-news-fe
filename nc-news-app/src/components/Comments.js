@@ -1,5 +1,5 @@
 import React from 'react';
-import { getComments, updateVote, postComment } from '../api';
+import { getComments, updateVote, postComment, deleteComment } from '../api';
 import Voter from './Voter';
 
 class Comments extends React.Component {
@@ -24,7 +24,7 @@ class Comments extends React.Component {
         <h1>Comments</h1>
         <PostComment submitComment={this.submitComment} />
         {comments.sort((a, b) => b.votes - a.votes).map((comment, i) => (
-          <Comment comment={comment} makeVote={this.makeVote} deleteComment={this.deleteComment} key={i} />
+          <Comment comment={comment} makeVote={this.makeVote} deleteThisComment={this.deleteThisComment} key={i} />
         ))}
       </section>
     )
@@ -54,16 +54,19 @@ class Comments extends React.Component {
       })
   }
 
-  deleteComment = (commentId) => {
-    console.log(commentId)
-    const oldComments = this.state.comments;
-    console.log(oldComments)
-    const newComments = oldComments.filter(comment => comment["_id"] !== commentId)
-    this.setState({ comments: newComments })
+  deleteThisComment = (commentId) => {
+    deleteComment(commentId)
+      .then(res => {
+        if (res.status === 200) {
+          const oldComments = this.state.comments;
+          const newComments = oldComments.filter(comment => comment["_id"] !== commentId)
+          this.setState({ comments: newComments })
+        }
+      })
   }
 }
 
-const Comment = ({ comment, makeVote, deleteComment }) => {
+const Comment = ({ comment, makeVote, deleteThisComment }) => {
   const { _id, body, created_by, created_at, votes, belongs_to } = comment;
   const onDownVote = makeVote.bind(null, _id, 'down');
   const onUpVote = makeVote.bind(null, _id, 'up');
@@ -73,7 +76,7 @@ const Comment = ({ comment, makeVote, deleteComment }) => {
       <p>{created_by}</p>
       <p>{created_at}</p>
       <Voter voteCount={votes} downVote={onDownVote} upVote={onUpVote} />
-      <button onClick={() => deleteComment(_id)}  >Delete</button>
+      <button onClick={() => deleteThisComment(_id)}  >Delete</button>
     </section>
   )
 }

@@ -49,3 +49,9 @@ export const postComment = (articleId, comment) => {
   })
     .then(res => res.json())
 }
+
+export const deleteComment = (commentId) => {
+  return fetch(`${URL}/comments/${commentId}`, {
+    method: 'DELETE'
+  })
+}
