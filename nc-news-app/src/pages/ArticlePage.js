@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import FontAwesome from 'react-fontawesome';
+import { Card, CardText, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
 import Voter from '../components/Voter';
 import { updateVote, getArticle } from '../api';
 import Comments from '../components/Comments';
@@ -44,15 +46,21 @@ const ArticleFull = ({ article, makeVote }) => {
   const onUpVote = makeVote.bind(null, _id, 'up');
   return (
     <div className="container">
-      <div className="card">
-        <div className="card-body">
-          <h3 className="card-title">{title}</h3>
-          <p className="card-subtitle mb-2 text-muted">By <Link to={'/users/' + created_by}>{created_by}</Link></p>
-          <p className="card-text">{body}</p>
-          <p className="card-subtitle mb-2 text-muted">Topic: <Link to={'/topics/' + belongs_to}>{belongs_to}</Link></p>
-          <Voter voteCount={votes} downVote={onDownVote} upVote={onUpVote} />
-        </div>
-      </div>
+      <Card>
+        <CardBody>
+          <CardTitle>
+            <p className="article-title">{title}</p>
+          </CardTitle>
+          <CardSubtitle>
+            <p className="article-subtitle">Written by <Link to={'/users/' + created_by}>{created_by}</Link></p>
+          </CardSubtitle>
+          <CardText>
+            <p className="article-body">{body}</p>
+            <p className="article-comments">Topic: <Link to={'/topics/' + belongs_to}>{belongs_to}</Link></p>
+            <Voter voteCount={votes} downVote={onDownVote} upVote={onUpVote} />
+          </CardText>
+        </CardBody>
+      </Card>
     </div>
   );
 }
