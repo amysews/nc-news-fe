@@ -10,13 +10,29 @@ import TopicPage from './pages/TopicPage';
 import UsersPage from './pages/UsersPage';
 import UserPage from './pages/UserPage';
 import ArticlePage from './pages/ArticlePage';
+import { getUser } from './api';
+
 
 class App extends React.Component {
+  state = {
+    user: {}
+  };
+
+  componentDidMount() {
+    this.fetchUser("northcoder");
+  }
+
+  fetchUser = (username) => {
+    getUser(username)
+      .then(({ user }) => this.setState({ user }))
+      .catch(console.log)
+  }
+
   render() {
     return (
       <BrowserRouter>
         <div>
-          <NavBar />
+          <NavBar user={this.state.user} />
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route exact path="/articles" component={HomePage} />

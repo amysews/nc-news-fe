@@ -3,7 +3,12 @@ import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, Un
 
 class NavBar extends React.Component {
   state = {
-    isOpen: false
+    isOpen: false,
+    user: {}
+  }
+
+  componentWillReceiveProps = (newProps) => {
+    this.setState({ user: newProps.user })
   }
 
   toggle = () => {
@@ -11,6 +16,7 @@ class NavBar extends React.Component {
   }
 
   render() {
+    const { user } = this.state;
     return (
       <div>
         <Navbar color="faded" light expand="md">
@@ -39,6 +45,9 @@ class NavBar extends React.Component {
               </UncontrolledDropdown>
               <NavItem>
                 <NavLink href="/users">Users</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="/users/northcoder"><img src={user.avatar_url} alt="Profile picture" height="20" width="20" style={{borderRadius:"50%"}}/>  {user.username}</NavLink>
               </NavItem>
             </Nav>
           </Collapse>
