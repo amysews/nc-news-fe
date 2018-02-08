@@ -1,11 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Voter from './Voter';
+import Loading from './Loading';
 import { getArticles, updateVote } from '../api';
 
 class Articles extends React.Component {
   state = {
-    articles: []
+    articles: [],
+    loading: true
   };
 
   componentDidMount() {
@@ -14,12 +16,13 @@ class Articles extends React.Component {
 
   fetchArticles = () => {
     getArticles(this.props.endpoint)
-      .then(({ articles }) => this.setState({ articles }))
+      .then(({ articles }) => this.setState({ articles, loading: false }))
       .catch(console.log)
   }
 
   render() {
-    const { articles } = this.state;
+    const { articles, loading } = this.state;
+    if (loading) return ( <Loading message={"loading"} loading={loading} /> )
     return (
       <section>
         {articles.sort((a, b) => b.votes - a.votes).slice(0, 10).map((article, i) => {

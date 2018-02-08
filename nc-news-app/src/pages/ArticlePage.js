@@ -6,7 +6,8 @@ import Comments from '../components/Comments';
 
 class ArticlePage extends React.Component {
   state = {
-    article: {}
+    article: {},
+    loading: true
   };
 
   componentDidMount() {
@@ -15,7 +16,7 @@ class ArticlePage extends React.Component {
 
   fetchArticle = (articleId) => {
     getArticle(articleId)
-      .then(article => this.setState({ article }))
+      .then(article => this.setState({ article, loading: false }))
       .catch(console.log)
   }
 
