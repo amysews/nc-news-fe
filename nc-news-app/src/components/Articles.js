@@ -48,7 +48,7 @@ class Articles extends React.Component {
 }
 
 const ArticleSummary = ({ article, makeVote }) => {
-  const { _id, title, body, created_by, belongs_to, votes, comments } = article;
+  const { _id, title, created_by, votes, comments } = article;
   const onDownVote = makeVote.bind(null, _id, 'down');
   const onUpVote = makeVote.bind(null, _id, 'up');
   return (

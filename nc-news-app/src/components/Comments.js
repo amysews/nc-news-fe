@@ -68,7 +68,7 @@ class Comments extends React.Component {
 }
 
 const Comment = ({ comment, makeVote, deleteThisComment }) => {
-  const { _id, body, created_by, created_at, votes, belongs_to } = comment;
+  const { _id, body, created_by, created_at, votes } = comment;
   const date = moment(created_at).format('MMMM Do YYYY, h:mm:ss a');
   const onDownVote = makeVote.bind(null, _id, 'down');
   const onUpVote = makeVote.bind(null, _id, 'up');
