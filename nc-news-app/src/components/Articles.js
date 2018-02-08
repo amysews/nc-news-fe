@@ -5,6 +5,7 @@ import { Card, CardText, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
 import Voter from './Voter';
 import Loading from './Loading';
 import { getArticles, updateVote } from '../api';
+import moment from 'moment';
 
 class Articles extends React.Component {
   state = {
@@ -53,7 +54,8 @@ class Articles extends React.Component {
 }
 
 const ArticleSummary = ({ article, makeVote }) => {
-  const { _id, title, body, created_by, votes, comments } = article;
+  const { _id, title, body, created_by, created_at, votes, comments } = article;
+  const date = moment(created_at).format('MMMM Do YYYY, h:mm:ss a');  
   const onDownVote = makeVote.bind(null, _id, 'down');
   const onUpVote = makeVote.bind(null, _id, 'up');
   return (
@@ -64,7 +66,7 @@ const ArticleSummary = ({ article, makeVote }) => {
             <Link to={'/articles/' + _id}><p className="article-title">{title}</p></Link>
           </CardTitle>
           <CardSubtitle>
-            <p className="article-subtitle" >Written by <Link to={'/users/' + created_by}>{created_by}</Link></p>
+            <p className="article-subtitle" >Written by <Link to={'/users/' + created_by}>{created_by}</Link> on {date}</p>
           </CardSubtitle>
           <CardText>
             <p className="article-body" >"{body.slice(0, 250)}..."</p>

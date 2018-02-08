@@ -1,5 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { getComments, updateVote, postComment, deleteComment } from '../api';
+import FontAwesome from 'react-fontawesome';
+import { Card, CardText, CardBody, CardTitle, CardSubtitle, Button } from 'reactstrap';
 import Voter from './Voter';
 import moment from 'moment';
 
@@ -22,7 +25,7 @@ class Comments extends React.Component {
     const { comments } = this.state;
     return (
       <section className="container comments">
-        <h3>Comments</h3>
+        <h1>Comments</h1>
         <PostComment submitComment={this.submitComment} />
         {comments.sort((a, b) => b.votes - a.votes).map((comment, i) => (
           <Comment comment={comment} makeVote={this.makeVote} deleteThisComment={this.deleteThisComment} key={i} />
@@ -73,14 +76,21 @@ const Comment = ({ comment, makeVote, deleteThisComment }) => {
   const onDownVote = makeVote.bind(null, _id, 'down');
   const onUpVote = makeVote.bind(null, _id, 'up');
   return (
-    <div className="card">
-      <div className="card-body">
-        <p className="card-text">{body}</p>
-        <p className="card-subtitle mb-2 text-muted">{date} by {created_by}</p>
-        <Voter voteCount={votes} downVote={onDownVote} upVote={onUpVote} />
-        <button className="btn btn-danger" onClick={() => deleteThisComment(_id)}  >Delete</button>
-      </div>
-    </div>
+    <section>
+      <Card>
+        <CardBody>
+          <CardText>
+            <p className="comment-body">{body}</p>
+          </CardText>
+          <CardSubtitle>
+            <p className="comment-subtitle">{date} by <Link to={'/users/' + created_by}>{created_by}</Link></p>
+          </CardSubtitle>
+          <Voter voteCount={votes} downVote={onDownVote} upVote={onUpVote} />
+        <FontAwesome name="trash" className="delete-button" onClick={() => deleteThisComment(_id)} />
+        </CardBody>
+      </Card>
+    </section>
+
   )
 }
 
@@ -89,7 +99,7 @@ const PostComment = ({ submitComment }) => {
     <section className="submit-comment">
       <form onSubmit={submitComment}>
         <textarea id="comment" placeholder="Add your comment..." />
-        <button class="btn btn-secondary" type="submit">Submit</button>
+        <Button outline color="success" type="submit" >Submit</Button>
       </form>
     </section>
   )

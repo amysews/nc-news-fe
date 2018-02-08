@@ -17,16 +17,16 @@ h1 {
   font-weight: bold;
 }
 
-.article-subtitle {
+.article-subtitle, .comment-subtitle {
   color: rgb(148, 148, 148);
   font-size: 0.9em;
 }
 
-.article-body {
+.article-body, .comment-body {
   font-size: 0.9em;
 }
 
-.article-comments {
+.article-comments, .delete-button {
   float: right;
 }
 
@@ -34,8 +34,8 @@ h1 {
   color: green;
 }
 
-.vote-down:hover {
-  color: red;
+.vote-down:hover, .delete-button:hover {
+  color: rgb(184, 23, 23);
 }
 
 .btn-danger {
