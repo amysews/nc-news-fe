@@ -20,7 +20,7 @@ class UsersPage extends React.Component {
   render() {
     const { users } = this.state;
     return (
-      <section>
+      <section  class="container">
         <h1>List of Users</h1>
         {users.map((user, i) => {
           return (

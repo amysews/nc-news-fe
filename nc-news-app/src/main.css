@@ -1,10 +1,42 @@
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
 .card {
   margin-top: 10px;
 }
 
+h1 {
+  font-size: 1.4em;
+  font-weight: bold;
+}
 
-.voting > button {
-  margin: 10px;
+.article-title {
+  color: black;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.article-subtitle {
+  color: rgb(148, 148, 148);
+  font-size: 0.9em;
+}
+
+.article-body {
+  font-style: italic;
+  font-size: 0.9em;
+}
+
+.article-comments {
+  float: right;
+}
+
+.vote-up:hover {
+  color: green;
+}
+
+.vote-down:hover {
+  color: red;
 }
 
 .btn-danger {

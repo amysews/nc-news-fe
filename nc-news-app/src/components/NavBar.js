@@ -20,7 +20,7 @@ class NavBar extends React.Component {
     return (
       <div>
         <Navbar color="faded" light expand="md">
-          <NavbarBrand href="/">NC News</NavbarBrand>
+          <NavbarBrand href="/"><img src="/northcoders2.png" alt="Northcoders logo" height="40px" /></NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>

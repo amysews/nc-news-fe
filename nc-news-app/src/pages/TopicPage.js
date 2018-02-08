@@ -6,8 +6,8 @@ class TopicPage extends React.Component {
 
   render() {
     return (
-      <section>
-        <h1>All the articles about {this.props.match.params.topic}</h1>
+      <section class="container articles" >
+        <h1>Articles on {this.props.match.params.topic}</h1>
         <Articles endpoint={'topics/' + this.props.match.params.topic + '/articles'} />
       </section>
     )
