@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import FontAwesome from 'react-fontawesome';
 import { Card, CardText, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
 import Voter from '../components/Voter';
 import { updateVote, getArticle } from '../api';
@@ -57,10 +56,10 @@ const ArticleFull = ({ article, makeVote }) => {
             <p className="article-subtitle">Written by <Link to={'/users/' + created_by}>{created_by}</Link> on {date}</p>
           </CardSubtitle>
           <CardText>
-            <p className="article-body">{body}</p>
+            <span className="article-body">{body}</span>
+          </CardText>
             <p className="article-comments">Topic: <Link to={'/topics/' + belongs_to}>{belongs_to}</Link></p>
             <Voter voteCount={votes} downVote={onDownVote} upVote={onUpVote} />
-          </CardText>
         </CardBody>
       </Card>
     </div>

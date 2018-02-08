@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { getComments, updateVote, postComment, deleteComment } from '../api';
 import FontAwesome from 'react-fontawesome';
-import { Card, CardText, CardBody, CardTitle, CardSubtitle, Button } from 'reactstrap';
+import { Card, CardText, CardBody, CardSubtitle, Button } from 'reactstrap';
 import Voter from './Voter';
 import moment from 'moment';
 
@@ -51,6 +51,7 @@ class Comments extends React.Component {
   submitComment = (e) => {
     e.preventDefault();
     const newComment = e.target.comment.value;
+    if (!newComment) return;
     e.target.comment.value = ''
     postComment(this.state.comments[0].belongs_to, newComment)
       .then(({ comment }) => {
@@ -80,13 +81,13 @@ const Comment = ({ comment, makeVote, deleteThisComment }) => {
       <Card>
         <CardBody>
           <CardText>
-            <p className="comment-body">{body}</p>
+            <span className="comment-body">{body}</span>
           </CardText>
           <CardSubtitle>
             <p className="comment-subtitle">{date} by <Link to={'/users/' + created_by}>{created_by}</Link></p>
           </CardSubtitle>
           <Voter voteCount={votes} downVote={onDownVote} upVote={onUpVote} />
-        <FontAwesome name="trash" className="delete-button" onClick={() => deleteThisComment(_id)} />
+          <FontAwesome name="trash" className="delete-button" onClick={() => deleteThisComment(_id)} />
         </CardBody>
       </Card>
     </section>
