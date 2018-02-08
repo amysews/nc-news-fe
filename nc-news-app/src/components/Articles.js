@@ -48,14 +48,15 @@ class Articles extends React.Component {
 }
 
 const ArticleSummary = ({ article, makeVote }) => {
-  const { _id, title, created_by, votes, comments } = article;
+  const { _id, title, body, created_by, votes, comments } = article;
   const onDownVote = makeVote.bind(null, _id, 'down');
   const onUpVote = makeVote.bind(null, _id, 'up');
   return (
     <section className="card">
       <div className="card-body">
         <Link to={'/articles/' + _id}><p>{title}</p></Link>
-        <Link to={'/users/' + created_by}><p>{created_by}</p></Link>
+        <p>"{body.slice(0, 250)}..."</p>
+        <Link to={'/users/' + created_by}><p>Written by {created_by}</p></Link>
         <Voter voteCount={votes} downVote={onDownVote} upVote={onUpVote} />
         <p>Comments: {comments}</p>
       </div>
