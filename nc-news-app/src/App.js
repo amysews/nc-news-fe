@@ -2,14 +2,14 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import './main.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import NavBar from './NavBar';
-import HomePage from './HomePage';
-import PageNotFound from './PageNotFound';
-import TopicsPage from './TopicsPage';
-import TopicPage from './TopicPage';
-import UsersPage from './UsersPage';
-import UserPage from './UserPage';
-import ArticlePage from './ArticlePage';
+import NavBar from './components/NavBar';
+import HomePage from './pages/HomePage';
+import PageNotFound from './pages/PageNotFound';
+import TopicsPage from './pages/TopicsPage';
+import TopicPage from './pages/TopicPage';
+import UsersPage from './pages/UsersPage';
+import UserPage from './pages/UserPage';
+import ArticlePage from './pages/ArticlePage';
 
 class App extends React.Component {
   render() {

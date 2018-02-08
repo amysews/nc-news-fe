@@ -1,5 +1,5 @@
 import React from 'react';
-import Articles from './Articles';
+import Articles from '../components/Articles';
 
 class TopicPage extends React.Component {
   // display Nav with topics at the top of every page?

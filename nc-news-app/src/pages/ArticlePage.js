@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Voter from './Voter';
+import Voter from '../components/Voter';
 import { updateVote, getArticle } from '../api';
-import Comments from './Comments';
+import Comments from '../components/Comments';
 
 class ArticlePage extends React.Component {
   state = {
