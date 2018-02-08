@@ -1,40 +1,51 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
-const NavBar = () => {
-  return (
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <Link to="/" class="navbar-brand" ><h1>Northcoders News</h1></Link>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item active">
-            <NavLink to="/" class="nav-link" >Articles</NavLink>
-          </li>
-          <li class="nav-item">
-            <NavLink to="/topics" class="nav-link" >Topics</NavLink>
-          </li>
-          <li class="nav-item">
-            <NavLink to="/users" class="nav-link" >Users</NavLink>
-          </li>
-        </ul>
+class NavBar extends React.Component {
+  state = {
+    isOpen: false
+  }
+
+  toggle = () => {
+    this.setState({ isOpen: !this.state.isOpen });
+  }
+
+  render() {
+    return (
+      <div>
+        <Navbar color="faded" light expand="md">
+          <NavbarBrand href="/">NC News</NavbarBrand>
+          <NavbarToggler onClick={this.toggle} />
+          <Collapse isOpen={this.state.isOpen} navbar>
+            <Nav className="ml-auto" navbar>
+              <NavItem>
+                <NavLink href="/articles">Articles</NavLink>
+              </NavItem>
+              <UncontrolledDropdown nav inNavbar>
+                <DropdownToggle nav caret>
+                  Topics
+                </DropdownToggle>
+                <DropdownMenu >
+                  <DropdownItem>
+                    <NavLink href="/topics/football">Football</NavLink>
+                  </DropdownItem>
+                  <DropdownItem>
+                    <NavLink href="/topics/coding">Coding</NavLink>
+                  </DropdownItem>
+                  <DropdownItem>
+                    <NavLink href="/topics/cooking">Cooking</NavLink>
+                  </DropdownItem>
+                </DropdownMenu>
+              </UncontrolledDropdown>
+              <NavItem>
+                <NavLink href="/users">Users</NavLink>
+              </NavItem>
+            </Nav>
+          </Collapse>
+        </Navbar>
       </div>
-    </nav>
-  )
+    );
+  }
 }
 
 export default NavBar;
-
-{/* <div>
-      <Link to="/"><h1>Northcoders News</h1></Link>
-      <nav>
-        <h3>Navigation</h3>
-        <NavLink to="/">Articles</NavLink>
-        {"  |  "}
-        <NavLink to="/topics">Topics</NavLink>
-        {"  |  "}
-        <NavLink to="/users">Users</NavLink>
-      </nav>
-    </div> */}
