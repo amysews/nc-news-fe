@@ -47,7 +47,7 @@ class NavBar extends React.Component {
                 <NavLink href="/users">Users</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/users/northcoder"><img src={user.avatar_url} alt="Avatar" height="20" width="20" style={{borderRadius:"50%"}}/>  {user.username}</NavLink>
+                <NavLink href="/users/northcoder"><img onError={addDefaultSrc} src={user.avatar_url} alt="Avatar" height="20" width="20" style={{borderRadius:"50%"}}/>  {user.username}</NavLink>
               </NavItem>
             </Nav>
           </Collapse>
@@ -55,6 +55,10 @@ class NavBar extends React.Component {
       </div>
     );
   }
+}
+
+const addDefaultSrc = (e) => {
+  e.target.src = '/default_profile.png';
 }
 
 export default NavBar;

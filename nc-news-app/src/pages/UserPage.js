@@ -29,9 +29,13 @@ const UserFull = ({ user }) => {
     <section>
       <p>{user.name}</p>
       <p>{user.username}</p>
-      <img src={user.avatar_url} alt={user.username} />
+      <img onError={addDefaultSrc} src={user.avatar_url} alt={user.username} />
     </section>
   )
+}
+
+const addDefaultSrc = (e) => {
+  e.target.src = '/default_profile.png';
 }
 
 export default UserPage;
