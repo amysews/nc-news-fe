@@ -10,8 +10,8 @@ export const updateVote = (type, id, direction) => {
     })
 }
 
-export const getArticles = (type) => {
-  return fetch(`${URL}/${type}`)
+export const getArticles = (type, page = 0, limit = 10, sort = null) => {
+  return fetch(`${URL}/${type}?page=${page}&limit=${limit}&sort=${sort}`)
     .then(res => res.json())
 }
 
