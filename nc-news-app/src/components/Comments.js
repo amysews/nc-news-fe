@@ -37,7 +37,7 @@ class Comments extends React.Component {
   makeVote = (id, direction) => {
     updateVote('comments', id, direction)
       .then(body => {
-        const newComment = body;
+        const newComment = body.comment;
         const newComments = this.state.comments.map(comment => {
           if (comment._id === newComment._id) {
             return newComment;

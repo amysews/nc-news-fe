@@ -18,14 +18,14 @@ class ArticlePage extends React.Component {
 
   fetchArticle = (articleId) => {
     getArticle(articleId)
-      .then(article => this.setState({ article, loading: false }))
+      .then(({ article }) => this.setState({ article, loading: false }))
       .catch(console.log)
   }
 
   makeVote = (id, direction) => {
     updateVote('articles', id, direction)
       .then(body => {
-        this.setState({ article: body })
+        this.setState({ article: body.article })
       })
   }
 
