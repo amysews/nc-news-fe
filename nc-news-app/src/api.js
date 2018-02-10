@@ -35,8 +35,8 @@ export const getUsers = () => {
     .then(res => res.json())
 }
 
-export const getComments = (articleId) => {
-  return fetch(`${URL}/articles/${articleId}/comments`)
+export const getComments = (articleId, sort = null) => {
+  return fetch(`${URL}/articles/${articleId}/comments?sort=${sort}`)
     .then(res => res.json())
 }
 

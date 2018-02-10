@@ -8,30 +8,54 @@ import moment from 'moment';
 
 class Comments extends React.Component {
   state = {
-    comments: []
+    comments: [],
+    articleId: null,
+    sort: '-created_at'
   };
 
   componentWillReceiveProps(newProps) {
     this.fetchComments(newProps.articleId);
   }
 
-  fetchComments = (articleId) => {
-    getComments(articleId)
-      .then(({ comments }) => this.setState({ comments: comments }))
+  fetchComments = (articleId = this.state.articleId) => {
+    console.log('fetch comments, ', articleId)
+    getComments(articleId, this.state.sort)
+      .then(({comments, sort}) => {
+        console.log(sort, comments);
+        this.setState({ comments, articleId })
+      })
       .catch(console.log)
   }
 
   render() {
-    const { comments } = this.state;
+    const { comments, sort } = this.state;
     return (
       <section className="container comments">
         <h1>Comments</h1>
+
+        <section className="display-options">
+          <span className="handle-sort">
+            Sort by:
+            <select onChange={this.handleSort} value={sort} >
+              <option value="-created_at">Newest</option>
+              <option value="+created_at">Oldest</option>
+              <option value="-votes">Highest Voted</option>
+              <option value="+votes">Lowest Voted</option>
+            </select>
+          </span>
+        </section>
+
         <PostComment submitComment={this.submitComment} />
         {comments.sort((a, b) => b.votes - a.votes).map((comment, i) => (
           <Comment comment={comment} makeVote={this.makeVote} deleteThisComment={this.deleteThisComment} key={i} />
         ))}
       </section>
     )
+  }
+
+  handleSort = (e) => {
+    const { articleId } =  this.state;
+    this.setState({ sort: e.target.value}, () => this.fetchComments(articleId));
   }
 
   makeVote = (id, direction) => {
@@ -62,7 +86,7 @@ class Comments extends React.Component {
   deleteThisComment = (commentId) => {
     deleteComment(commentId)
       .then(res => {
-        if (res.status === 200) {
+        if (res.status === 204) {
           const oldComments = this.state.comments;
           const newComments = oldComments.filter(comment => comment["_id"] !== commentId)
           this.setState({ comments: newComments })
