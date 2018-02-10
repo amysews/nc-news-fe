@@ -42,6 +42,49 @@ h1 {
   float: right;
 }
 
+.display-options {
+  text-align: right;
+}
+
+.display-options > span > select {
+  margin-left: 8px;
+}
+
+.handle-limit, .handle-sort {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.handle-sort {
+  margin-left: 20px;
+}
+
+@media (max-width: 470px) {
+  .display-options {
+    display: grid;
+  }
+}
+
+.pagination {
+  display: grid;
+  grid-template-columns: 40px 1fr 40px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.prev {
+  grid-column: 1 / span 1;
+}
+
+.page-num {
+  grid-column: 2 / span 1;
+  margin: auto;
+}
+
+.next {
+  grid-column: 3 / span 1;
+}
+
 textarea {
   resize: none;
   width: 100%;
