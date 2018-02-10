@@ -84,7 +84,7 @@ class Articles extends React.Component {
   }
 
   handleSort = (e) => {
-    this.setState({ sort: e.target.value }, () => this.fetchArticles());
+    this.setState({ sort: e.target.value, currentPage: 0, targetPage: 0 }, () => this.fetchArticles());
   }
 
   previousPage = () => {
