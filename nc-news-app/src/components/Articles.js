@@ -99,7 +99,7 @@ class Articles extends React.Component {
   makeVote = (id, direction) => {
     updateVote('articles', id, direction)
       .then(body => {
-        const newArticle = body;
+        const newArticle = body.article;
         const newArticles = this.state.articles.map(article => {
           if (article._id === newArticle._id) {
             newArticle.comments = article.comments;
