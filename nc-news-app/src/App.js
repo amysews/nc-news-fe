@@ -37,7 +37,7 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route exact path="/articles" component={HomePage} />
-            <Route exact path="/articles/:article_id" component={ArticlePage} />
+            <Route exact path="/articles/:article_id" render={(props) => <ArticlePage loggedInUser={this.state.user} {...props} />} />
             <Route exact path="/topics" component={TopicsPage} />
             <Route exact path="/topics/:topic" component={TopicPage} />
             <Route exact path="/users" component={UsersPage} />

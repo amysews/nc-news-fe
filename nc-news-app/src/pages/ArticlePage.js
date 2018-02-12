@@ -13,7 +13,7 @@ class ArticlePage extends React.Component {
   };
 
   componentDidMount() {
-    this.fetchArticle(this.props.match.params.article_id);
+    this.fetchArticle(this.props.match.params.article_id); 
   }
 
   fetchArticle = (articleId) => {
@@ -34,7 +34,7 @@ class ArticlePage extends React.Component {
     return (
       <section>
         <ArticleFull article={article} makeVote={this.makeVote} />
-        <Comments articleId={article._id} />
+        <Comments loggedInUser={this.props.loggedInUser} articleId={article._id} />
       </section>
     );
   }

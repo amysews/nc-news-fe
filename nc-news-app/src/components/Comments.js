@@ -46,7 +46,7 @@ class Comments extends React.Component {
 
         <PostComment submitComment={this.submitComment} />
         {comments.map((comment, i) => (
-          <Comment comment={comment} makeVote={this.makeVote} deleteThisComment={this.deleteThisComment} key={i} />
+          <Comment loggedInUser={this.props.loggedInUser} comment={comment} makeVote={this.makeVote} deleteThisComment={this.deleteThisComment} key={i} />
         ))}
       </section>
     )
@@ -94,7 +94,7 @@ class Comments extends React.Component {
   }
 }
 
-const Comment = ({ comment, makeVote, deleteThisComment }) => {
+const Comment = ({ loggedInUser, comment, makeVote, deleteThisComment }) => {
   const { _id, body, created_by, created_at, votes } = comment;
   const date = moment(created_at).format('MMMM Do YYYY, h:mm:ss a');
   const onDownVote = makeVote.bind(null, _id, 'down');
@@ -110,11 +110,10 @@ const Comment = ({ comment, makeVote, deleteThisComment }) => {
             <p className="comment-subtitle">{date} by <Link to={'/users/' + created_by}>{created_by}</Link></p>
           </CardSubtitle>
           <Voter voteCount={votes} downVote={onDownVote} upVote={onUpVote} />
-          <FontAwesome name="trash" className="delete-button" onClick={() => deleteThisComment(_id)} />
+          {loggedInUser && loggedInUser.username === created_by ? <FontAwesome name="trash" className="delete-button" onClick={() => deleteThisComment(_id)} /> : null }
         </CardBody>
       </Card>
     </section>
-
   )
 }
 
