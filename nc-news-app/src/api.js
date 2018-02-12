@@ -36,8 +36,13 @@ export const getUsers = () => {
 }
 
 export const getComments = (articleId, sort = null) => {
-  return fetch(`${URL}/articles/${articleId}/comments?sort=${sort}`)
+  const url = `${URL}/articles/${articleId}/comments?sort=${sort}`;
+  return fetch(url)
     .then(res => res.json())
+    .then(r => {
+      console.log(url, r)
+      return r
+    })
 }
 
 export const postComment = (articleId, comment) => {

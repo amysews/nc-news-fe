@@ -18,10 +18,9 @@ class Comments extends React.Component {
   }
 
   fetchComments = (articleId = this.state.articleId) => {
-    console.log('fetch comments, ', articleId)
-    getComments(articleId, this.state.sort)
+    const { sort } = this.state;
+    getComments(articleId, sort)
       .then(({comments, sort}) => {
-        console.log(sort, comments);
         this.setState({ comments, articleId })
       })
       .catch(console.log)
@@ -46,7 +45,7 @@ class Comments extends React.Component {
         </section>
 
         <PostComment submitComment={this.submitComment} />
-        {comments.sort((a, b) => b.votes - a.votes).map((comment, i) => (
+        {comments.map((comment, i) => (
           <Comment comment={comment} makeVote={this.makeVote} deleteThisComment={this.deleteThisComment} key={i} />
         ))}
       </section>
@@ -55,7 +54,7 @@ class Comments extends React.Component {
 
   handleSort = (e) => {
     const { articleId } =  this.state;
-    this.setState({ sort: e.target.value}, () => this.fetchComments(articleId));
+    this.setState({ sort: e.target.value }, () => this.fetchComments(articleId));
   }
 
   makeVote = (id, direction) => {

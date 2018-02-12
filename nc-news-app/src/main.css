@@ -100,3 +100,20 @@ textarea {
 .comments, .articles {
   margin-top: 30px;
 }
+
+td, th {
+  padding: 10px;
+}
+
+table, thead, tbody, tr, th, td {
+  border: 1px lightgray solid;
+  text-align: center;
+}
+
+thead {
+  background-color: lightgray;
+}
+
+.users-page-arrows {
+  font-size: 1.5em;
+}
