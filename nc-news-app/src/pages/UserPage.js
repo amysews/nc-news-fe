@@ -26,9 +26,9 @@ class UserPage extends React.Component {
 
 const UserFull = ({ user }) => {
   return (
-    <section>
-      <p>{user.name}</p>
-      <p>{user.username}</p>
+    <section className="user-profile">
+      <p>Name: {user.name}</p>
+      <p>Username: {user.username}</p>
       <img onError={addDefaultSrc} src={user.avatar_url} alt={user.username} />
     </section>
   )
