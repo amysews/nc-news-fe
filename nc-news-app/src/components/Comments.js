@@ -32,6 +32,8 @@ class Comments extends React.Component {
       <section className="container comments">
         <h1>Comments</h1>
 
+        <PostComment submitComment={this.submitComment} />
+
         <section className="display-options">
           <span className="handle-sort">
             Sort by:
@@ -43,8 +45,7 @@ class Comments extends React.Component {
             </select>
           </span>
         </section>
-
-        <PostComment submitComment={this.submitComment} />
+        
         {comments.map((comment, i) => (
           <Comment loggedInUser={this.props.loggedInUser} comment={comment} makeVote={this.makeVote} deleteThisComment={this.deleteThisComment} key={i} />
         ))}

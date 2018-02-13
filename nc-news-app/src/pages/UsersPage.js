@@ -22,7 +22,7 @@ class UsersPage extends React.Component {
   }
 
   render() {
-    const { users, sortOn, sortDirection } = this.state;
+    const { users } = this.state;
     return (
       <section className="container">
         <h1>List of Users</h1>
@@ -55,7 +55,6 @@ class UsersPage extends React.Component {
     const sortedUsers = users.slice()
     if (sortDirection === 'asc') sortedUsers.sort((a,b) => a[sortOn] - b[sortOn])
     if (sortDirection === 'desc') sortedUsers.sort((a,b) => b[sortOn] - a[sortOn])
-    console.log(sortOn, sortDirection, sortedUsers)
     this.setState({ users: sortedUsers, sortOn, sortDirection });
   }
 }

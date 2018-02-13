@@ -39,10 +39,6 @@ export const getComments = (articleId, sort = null) => {
   const url = `${URL}/articles/${articleId}/comments?sort=${sort}`;
   return fetch(url)
     .then(res => res.json())
-    .then(r => {
-      console.log(url, r)
-      return r
-    })
 }
 
 export const postComment = (articleId, comment) => {

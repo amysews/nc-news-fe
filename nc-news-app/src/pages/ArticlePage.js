@@ -4,7 +4,6 @@ import { Card, CardText, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
 import Voter from '../components/Voter';
 import { updateVote, getArticle } from '../api';
 import Comments from '../components/Comments';
-import moment from 'moment';
 
 class ArticlePage extends React.Component {
   state = {
@@ -41,8 +40,7 @@ class ArticlePage extends React.Component {
 }
 
 const ArticleFull = ({ article, makeVote }) => {
-  const { _id, title, body, created_by, created_at, belongs_to, votes } = article;
-  const date = moment(created_at).format('MMMM Do YYYY, h:mm:ss a');    
+  const { _id, title, body, created_by, belongs_to, votes } = article;
   const onDownVote = makeVote.bind(null, _id, 'down');
   const onUpVote = makeVote.bind(null, _id, 'up');
   return (
@@ -53,7 +51,7 @@ const ArticleFull = ({ article, makeVote }) => {
             <p className="article-title">{title}</p>
           </CardTitle>
           <CardSubtitle>
-            <p className="article-subtitle">Written by <Link to={'/users/' + created_by}>{created_by}</Link> on {date}</p>
+            <p className="article-subtitle">Written by <Link to={'/users/' + created_by}>{created_by}</Link></p>
           </CardSubtitle>
           <CardText>
             <span className="article-body">{body}</span>
