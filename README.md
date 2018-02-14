@@ -10,7 +10,7 @@ The App has been deployed to Heroku and be accessed [here](#)
 
 ### Environment Setup
 
-The following tools are required to run this API locally. Links to guides have been provided to help with installation where required:
+The following tools are required to run this locally. Links to guides have been provided to help with installation where required:
 
 * npm - [installation guide](https://www.npmjs.com/get-npm)
 * Node.js - [installation guide](https://nodejs.org/en/download/package-manager/)
@@ -20,12 +20,12 @@ The following tools are required to run this API locally. Links to guides have b
 
 To run this project locally, clone this repository to your local machine, move inside the react-app folder and install the dependencies:
 ```
-git clone https://github.com/amysews/FE-FT-NC-News.git
-cd nc-news-app
+git clone https://github.com/amysews/nc-news-fe.git
+cd nc-news-fe/nc-news-app
 npm install
 ```
 
-The API supporting this app must be running to serve the information. Follow this [link](https://github.com/amysews/BE-FT-northcoders-news) to setup the backend.
+The API supporting this app must be running to serve the information. Follow this [link](https://github.com/amysews/nc-news-be) to setup the backend.
 
 To run the app enter the following command:
 ```
