@@ -21,7 +21,7 @@ The following tools are required to run this API locally. Links to guides have b
 To run this project locally, clone this repository to your local machine, move inside the react-app folder and install the dependencies:
 ```
 git clone https://github.com/amysews/FE-FT-NC-News.git
-cd nc-news-app
+cd FE-FT-NC-News/nc-news-app
 npm install
 ```
 
