@@ -21,7 +21,7 @@ The following tools are required to run this locally. Links to guides have been 
 To run this project locally, clone this repository to your local machine, move inside the react-app folder and install the dependencies:
 ```
 git clone https://github.com/amysews/nc-news-fe.git
-cd nc-news-fe/nc-news-app
+cd nc-news-fe
 npm install
 ```
 
