@@ -4,6 +4,7 @@ import { Card, CardText, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
 import Voter from '../components/Voter';
 import { updateVote, getArticle } from '../api';
 import Comments from '../components/Comments';
+import PropTypes from 'prop-types';
 
 class ArticlePage extends React.Component {
   state = {
@@ -12,20 +13,20 @@ class ArticlePage extends React.Component {
   };
 
   componentDidMount() {
-    this.fetchArticle(this.props.match.params.article_id); 
+    this.fetchArticle(this.props.match.params.article_id);
   }
 
   fetchArticle = (articleId) => {
     getArticle(articleId)
       .then(({ article }) => this.setState({ article, loading: false }))
-      .catch(console.log)
+      .catch(console.log);
   }
 
   makeVote = (id, direction) => {
     updateVote('articles', id, direction)
       .then(body => {
-        this.setState({ article: body.article })
-      })
+        this.setState({ article: body.article });
+      });
   }
 
   render() {
@@ -56,12 +57,27 @@ const ArticleFull = ({ article, makeVote }) => {
           <CardText>
             <span className="article-body">{body}</span>
           </CardText>
-            <p className="article-comments">Topic: <Link to={'/topics/' + belongs_to}>{belongs_to}</Link></p>
-            <Voter voteCount={votes} downVote={onDownVote} upVote={onUpVote} />
+          <p className="article-comments">Topic: <Link to={'/topics/' + belongs_to}>{belongs_to}</Link></p>
+          <Voter voteCount={votes} downVote={onDownVote} upVote={onUpVote} />
         </CardBody>
       </Card>
     </div>
   );
-}
+};
+
+ArticlePage.propTypes = {
+  loggedInUser: PropTypes.object.isRequired,
+  article_id: PropTypes.number.isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      article_id: PropTypes.number,
+    }),
+  }).isRequired,
+};
+
+ArticleFull.propTypes = {
+  article: PropTypes.object.isRequired,
+  makeVote: PropTypes.func.isRequired
+};
 
 export default ArticlePage;

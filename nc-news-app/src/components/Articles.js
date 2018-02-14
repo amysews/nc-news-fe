@@ -5,6 +5,7 @@ import { Card, CardText, CardBody, CardTitle, CardSubtitle, Pagination, Paginati
 import Voter from './Voter';
 import Loading from './Loading';
 import { getArticles, updateVote } from '../api';
+import PropTypes from 'prop-types';
 
 class Articles extends React.Component {
   state = {
@@ -28,12 +29,12 @@ class Articles extends React.Component {
         if (articles.length) this.setState({ articles, loading: false, count: articles.length, currentPage: targetPage });
         else this.setState({ laoding: false, targetPage: currentPage });
       })
-      .catch(console.log)
+      .catch(console.log);
   }
 
   render() {
     const { articles, loading, currentPage, sort, limit } = this.state;
-    if (loading) return (<Loading message={"loading"} loading={loading} />)
+    if (loading) return (<Loading message={'loading'} loading={loading} />);
     return (
       <section>
 
@@ -60,7 +61,7 @@ class Articles extends React.Component {
         {articles.map((article, i) => {
           return (
             <ArticleSummary article={article} makeVote={this.makeVote} key={i} />
-          )
+          );
         })}
 
         <Pagination className="pagination" >
@@ -106,7 +107,7 @@ class Articles extends React.Component {
           else return article;
         });
         this.setState({ articles: newArticles });
-      })
+      });
   }
 }
 
@@ -125,7 +126,7 @@ const ArticleSummary = ({ article, makeVote }) => {
             <p className="article-subtitle" >Written by <Link to={'/users/' + created_by}>{created_by}</Link></p>
           </CardSubtitle>
           <CardText>
-            <span className="article-body" >"{body.slice(0, 250)}..."</span>
+            <span className="article-body" >{body.slice(0, 250)}...</span>
             <br />
             <br />
             <Voter voteCount={votes} downVote={onDownVote} upVote={onUpVote} />
@@ -134,7 +135,16 @@ const ArticleSummary = ({ article, makeVote }) => {
         </CardBody>
       </Card>
     </section>
-  )
-}
+  );
+};
+
+Articles.propTypes = {
+  endpoint: PropTypes.string.isRequired
+};
+
+ArticleSummary.propTypes = {
+  article: PropTypes.object.isRequired,
+  makeVote: PropTypes.func.isRequired
+};
 
 export default Articles;

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { getTopics } from '../api';
+import PropTypes from 'prop-types';
 
 class TopicsPage extends React.Component {
   state = {
@@ -14,7 +15,7 @@ class TopicsPage extends React.Component {
   fetchTopics = () => {
     getTopics()
       .then(({ topics }) => this.setState({ topics }))
-      .catch(console.log)
+      .catch(console.log);
   }
 
   render() {
@@ -25,7 +26,7 @@ class TopicsPage extends React.Component {
         {topics.map((topic, i) => {
           return (
             <Topic topic={topic} key={i} />
-          )
+          );
         })}
       </section>
     );
@@ -37,7 +38,11 @@ const Topic = ({ topic }) => {
     <section>
       <Link to={'/topics/' + topic.slug}><p>{topic.title}</p></Link>
     </section>
-  )
-}
+  );
+};
+
+Topic.propTypes = {
+  topic: PropTypes.object.isRequired
+};
 
 export default TopicsPage;

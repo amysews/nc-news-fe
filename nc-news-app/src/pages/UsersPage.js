@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { getUsers } from '../api';
 import FontAwesome from 'react-fontawesome';
-
+import PropTypes from 'prop-types';
 
 class UsersPage extends React.Component {
   state = {
@@ -18,7 +18,7 @@ class UsersPage extends React.Component {
   fetchUsers = () => {
     getUsers()
       .then(({ users }) => this.setState({ users }))
-      .catch(console.log)
+      .catch(console.log);
   }
 
   render() {
@@ -41,7 +41,7 @@ class UsersPage extends React.Component {
             {users.map((user, i) => {
               return (
                 <UserSummary user={user} key={i} />
-              )
+              );
             })}
           </tbody>
         </table>
@@ -52,9 +52,9 @@ class UsersPage extends React.Component {
   handleSort = (sortDirection, sortOn) => {
     if (sortDirection === this.state.sortDirection && sortOn === this.state.sortOn) return;
     const { users } = this.state;
-    const sortedUsers = users.slice()
-    if (sortDirection === 'asc') sortedUsers.sort((a,b) => a[sortOn] - b[sortOn])
-    if (sortDirection === 'desc') sortedUsers.sort((a,b) => b[sortOn] - a[sortOn])
+    const sortedUsers = users.slice();
+    if (sortDirection === 'asc') sortedUsers.sort((a,b) => a[sortOn] - b[sortOn]);
+    if (sortDirection === 'desc') sortedUsers.sort((a,b) => b[sortOn] - a[sortOn]);
     this.setState({ users: sortedUsers, sortOn, sortDirection });
   }
 }
@@ -63,17 +63,21 @@ const UserSummary = ({ user }) => {
   const { username, name, avatar_url, commentsCount, articlesCount } = user;
   return (
     <tr>
-      <td><img onError={addDefaultSrc} src={avatar_url} alt="Avatar" height="40" width="40" style={{ borderRadius: "50%" }} /></td>
+      <td><img onError={addDefaultSrc} src={avatar_url} alt="Avatar" height="40" width="40" style={{ borderRadius: '50%' }} /></td>
       <td><Link to={'/users/' + username}>{username}</Link></td>
       <td>{name}</td>
       <td>{articlesCount}</td>
       <td>{commentsCount}</td>
     </tr>
-  )
-}
+  );
+};
 
 const addDefaultSrc = (e) => {
   e.target.src = '/default_profile.png';
-}
+};
+
+UserSummary.propTypes = {
+  user: PropTypes.object.isRequired
+};
 
 export default UsersPage;

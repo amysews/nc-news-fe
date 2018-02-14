@@ -20,13 +20,13 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    this.fetchUser("northcoder");
+    this.fetchUser('northcoder');
   }
 
   fetchUser = (username) => {
     getUser(username)
       .then(({ user }) => this.setState({ user }))
-      .catch(console.log)
+      .catch(console.log);
   }
 
   render() {
@@ -46,7 +46,7 @@ class App extends React.Component {
           </Switch>
         </div>
       </BrowserRouter>
-    )
+    );
   }
 }
 

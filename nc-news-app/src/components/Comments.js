@@ -5,6 +5,7 @@ import FontAwesome from 'react-fontawesome';
 import { Card, CardText, CardBody, CardSubtitle, Button } from 'reactstrap';
 import Voter from './Voter';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 
 class Comments extends React.Component {
   state = {
@@ -20,10 +21,10 @@ class Comments extends React.Component {
   fetchComments = (articleId = this.state.articleId) => {
     const { sort } = this.state;
     getComments(articleId, sort)
-      .then(({comments, sort}) => {
-        this.setState({ comments, articleId })
+      .then(({ comments }) => {
+        this.setState({ comments, articleId });
       })
-      .catch(console.log)
+      .catch(console.log);
   }
 
   render() {
@@ -45,16 +46,16 @@ class Comments extends React.Component {
             </select>
           </span>
         </section>
-        
+
         {comments.map((comment, i) => (
           <Comment loggedInUser={this.props.loggedInUser} comment={comment} makeVote={this.makeVote} deleteThisComment={this.deleteThisComment} key={i} />
         ))}
       </section>
-    )
+    );
   }
 
   handleSort = (e) => {
-    const { articleId } =  this.state;
+    const { articleId } = this.state;
     this.setState({ sort: e.target.value }, () => this.fetchComments(articleId));
   }
 
@@ -69,18 +70,18 @@ class Comments extends React.Component {
           else return comment;
         });
         this.setState({ comments: newComments });
-      })
+      });
   }
 
   submitComment = (e) => {
     e.preventDefault();
     const newComment = e.target.comment.value;
     if (!newComment) return;
-    e.target.comment.value = ''
+    e.target.comment.value = '';
     postComment(this.state.comments[0].belongs_to, newComment)
       .then(({ comment }) => {
-        this.setState({ comments: [comment, ...this.state.comments] })
-      })
+        this.setState({ comments: [comment, ...this.state.comments] });
+      });
   }
 
   deleteThisComment = (commentId) => {
@@ -88,10 +89,10 @@ class Comments extends React.Component {
       .then(res => {
         if (res.status === 204) {
           const oldComments = this.state.comments;
-          const newComments = oldComments.filter(comment => comment["_id"] !== commentId)
-          this.setState({ comments: newComments })
+          const newComments = oldComments.filter(comment => comment['_id'] !== commentId);
+          this.setState({ comments: newComments });
         }
-      })
+      });
   }
 }
 
@@ -111,12 +112,12 @@ const Comment = ({ loggedInUser, comment, makeVote, deleteThisComment }) => {
             <p className="comment-subtitle">{date} by <Link to={'/users/' + created_by}>{created_by}</Link></p>
           </CardSubtitle>
           <Voter voteCount={votes} downVote={onDownVote} upVote={onUpVote} />
-          {loggedInUser && loggedInUser.username === created_by ? <FontAwesome name="trash" className="delete-button" onClick={() => deleteThisComment(_id)} /> : null }
+          {loggedInUser && loggedInUser.username === created_by ? <FontAwesome name="trash" className="delete-button" onClick={() => deleteThisComment(_id)} /> : null}
         </CardBody>
       </Card>
     </section>
-  )
-}
+  );
+};
 
 const PostComment = ({ submitComment }) => {
   return (
@@ -126,7 +127,22 @@ const PostComment = ({ submitComment }) => {
         <Button outline color="success" type="submit" >Submit</Button>
       </form>
     </section>
-  )
-}
+  );
+};
+
+Comments.propTypes = {
+  loggedInUser: PropTypes.object.isRequired
+};
+
+Comment.propTypes = {
+  loggedInUser: PropTypes.object.isRequired,
+  comment: PropTypes.object.isRequired,
+  makeVote: PropTypes.func.isRequired,
+  deleteThisComment: PropTypes.func.isRequired
+};
+
+PostComment.propTypes = {
+  submitComment: PropTypes.func.isRequired
+};
 
 export default Comments;
